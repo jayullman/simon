@@ -62,13 +62,70 @@ button {
 /*** END CSS RESET ***/
 
 .console {
-	width: 300px;
-	height: 300px;
+	width: 350px;
+	height: 350px;
 	outline: 1px solid red;
 	margin: 20px auto 0 auto;
 }
 
 .pad {
-	width: 300px;
-	height: 300px;
+	width: 150px;
+	height: 150px;
+	display: inline-block;
+	vertical-align: top;
+	border: 10px solid #000;
+
+}
+
+.inner-border {
+	border: 5px solid #000;
+
+}
+
+.outer-border {
+	border: 10px solid #000;
+
+}
+
+/* Pad off/on styles */
+.pad-0 {
+	background-color: #259c4d;
+	border-top-left-radius: 100%;
+}
+
+.pad-0-on {
+	background-color: #3bff7d;
+
+}
+
+.pad-1 {
+	border-top-right-radius: 100%;
+	background-color: #960000;
+
+}
+
+.pad-1-on {
+	background-color: #ff0000;
+
+}
+
+.pad-2 {
+	border-bottom-left-radius: 100%;
+	background-color: #a0ad00;
+}
+
+.pad-2-on {
+	background-color: #f4ff29;
+
+}
+
+.pad-3 {
+	border-bottom-right-radius: 100%;
+	background-color: #008a8a;
+
+}
+
+.pad-3-on {
+	background-color: #00ffff;
+
 }
