@@ -1,6 +1,15 @@
+"use strict";
 
 function computerRandomChoice() {
   return Math.floor(Math.random() * 4);
+}
+
+/** will reset the game, either through player action or getting a wrong
+    answer in strict mode.
+  */
+function resetGame() {
+  console.log('Restarting');
+  computerSelections = [];
 }
 
 // function produces a closure to keep track of current round number
@@ -13,22 +22,27 @@ function outerFunctionPlayerChoice() {
       currentCount++;
       if (currentCount === computerSelections.length) {
         console.log("Computer's Turn!");
+        currentCount = 0;
         // --> go to computer's turn
         computerTurn();
       }
     } else {
       console.log('Incorrect. Try again!');
+      if (strictMode === true) {
+        console.log('Game restarting');
+        resetGame();
+      }
+
     }
   };
   return inner;
 }
 
-var playerChoice = playersTurn();
 
-function playersTurn() {
-  return outerFunctionPlayerChoice();
-}
 
+var playerChoice = outerFunctionPlayerChoice();
+
+var strictMode = false;
 var computerSelections = [];
 
 // this bool will allow/disallow interaction with app
@@ -59,7 +73,7 @@ function displayComputerSelections() {
         // if last in series, will change isPlayersTurn to true
         if (lastInSeries === true) {
           console.log('Player\'s Turn!');
-          // --> playersTurn()
+          isPlayersTurn = true;
         }
       }, 1000);
     })(selection);
