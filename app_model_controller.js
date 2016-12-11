@@ -1,4 +1,7 @@
 "use strict";
+/**********************
+MODEL / Controller
+**********************/
 
 function computerRandomChoice() {
   return Math.floor(Math.random() * 4);
@@ -31,6 +34,8 @@ function outerFunctionPlayerChoice() {
       if (strictMode === true) {
         console.log('Game restarting');
         resetGame();
+      } else {
+        displayComputerSelections();
       }
 
     }
