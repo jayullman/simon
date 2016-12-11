@@ -1,7 +1,8 @@
 "use strict";
 /**********************
-MODEL / Controller
+  MODEL / CONTROLLER
 **********************/
+
 
 function computerRandomChoice() {
   return Math.floor(Math.random() * 4);
