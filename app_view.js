@@ -64,6 +64,20 @@ function illuminateOff(padNumber) {
   }
 }
 
+// event handler when a control button is pressed
+function buttonDown(e) {
+  addClass(e.target, 'button-down');
+
+}
+
+// event handler when a control button is released
+function buttonUp(e) {
+  var button = document.getElementById('e.target.id');
+  removeClass(e.target, 'button-down');
+
+}
+
+
 window.onload = function() {
   // attach event handlers to all the pads
   // add event listeners for touch screens
@@ -84,6 +98,7 @@ window.onload = function() {
   var onSwitch = document.getElementById("on-switch");
   var onSwitchKnob = document.getElementById("on-switch-knob");
   var strictButton = document.getElementById("strict-button");
+  var buttons = document.getElementsByClassName('button');
 
   // handler for the strict mode button
   strictButton.addEventListener('click', function() {
@@ -99,6 +114,20 @@ window.onload = function() {
       turnStrictModeOff();
     }
   });
+
+  // handlers for button presses
+  for (var i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener('mousedown', buttonDown);
+    buttons[i].addEventListener('mouseup', buttonUp);
+  }
+
+  if ('ontouchstart' in window) {
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].addEventListener('touchstart', buttonDown);
+      buttons[i].addEventListener('touchend', buttonUp);
+    }
+  }
+
 
   // Handler for the on switch for the console
   onSwitch.addEventListener('click', function() {

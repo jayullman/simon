@@ -181,35 +181,54 @@ button {
 	transform: translateX(25px);
 }
 
-.strict-button-wrapper {
-	text-align: center;
-	outline: 1px solid red;
+.buttons-wrapper {
+
 }
 
-.strict-button {
+.button {
 	width: 20px;
 	height: 20px;
 	border-radius: 100%;
-	background-color: #9c9e10;
 	margin: 0 auto;
+	box-shadow: 0 2px #686868;
+	border: 2px solid gray;
+}
+
+.button-down {
+	position: relative;
+	top: 2px;
+	box-shadow: none;
+}
+
+.strict-button-wrapper {
+	text-align: center;
+	outline: 1px solid red;
+	width: 50px;
+	display: inline-block;
+}
+
+.strict-button {
+	background-color: #9c9e10;
 }
 
 .strict-button-on {
 	background-color: #fbff2a;
 
-}*/
+}
 
-/* start-button styles */
-/*
+.start-button-wrapper {
+	text-align: center;
+	outline: 1px solid red;
+	width: 50px;
+	display: inline-block;
+}
+
 .start-button {
-	width: 20px;
-	height: 20px;
-	border-radius: 100%;
+
 	background-color: #630000;
-	margin: 0 auto;
 }
 
 .start-button-on {
 	background-color: #ff0000;
 
-}*/
+}

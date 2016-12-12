@@ -117,6 +117,7 @@ function displayComputerSelections() {
           console.log('Player\'s Turn!');
           isPlayersTurn = true;
         }
+        // the number below determines how long the ON/OFF state is
       }, 1000);
     })(selection);
 
@@ -139,7 +140,7 @@ function displayComputerSelections() {
       setTimeout(function() {
         displaySelection(computerSelections[y], lastInSeries);
         // i * number determines the delay between computerSelections
-      }, i * 2000);
+      }, i * 1000);
     })(i, lastInSeries);
 
   } // END for-loop
