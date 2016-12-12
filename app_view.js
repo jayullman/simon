@@ -6,16 +6,20 @@
 var pads = document.getElementsByClassName('pad');
 
 function pressDown(e) {
-  var padNumber = e.target.id.slice(-1);
-  illuminateOn(padNumber);
+  if (isPlayersTurn) {
+    var padNumber = e.target.id.slice(-1);
+    illuminateOn(padNumber);
+  }
 
 }
 
 function  pressUp(e) {
-  var padNumber = Number(e.target.id.slice(-1));
-  illuminateOff(padNumber);
-  playerChoice(padNumber);
-  console.log(padNumber);
+  if (isPlayersTurn) {
+    var padNumber = Number(e.target.id.slice(-1));
+    illuminateOff(padNumber);
+    playerChoice(padNumber);
+    console.log(padNumber);
+  }
 }
 
 function illuminateOn(padNumber) {
@@ -34,11 +38,13 @@ function illuminateOff(padNumber) {
 
 window.onload = function() {
   // attach event handlers to all the pads
-
+  console.log(pads);
   // add event listeners for touch screens
   if ('ontouchstart' in window) {
-    pads[i].addEventListener('touchstart', pressDown);
-    pads[i].addEventListener('touchend', pressUp);
+    for (var i = 0; i < pads.length; i++) {
+      pads[i].addEventListener('touchstart', pressDown);
+      pads[i].addEventListener('touchend', pressUp);
+    }
   }
 
   for (var i = 0; i < pads.length; i++) {
