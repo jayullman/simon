@@ -5,6 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <title>Simon</title>
+  <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
   <link href="styles.css" rel="stylesheet">
   <script src="app_model_controller.js"></script>
   <script src="app_view.js"></script>
@@ -28,15 +30,26 @@
 
   <!-- Center Control -->
   <div id="center-control" class="center-control">
-    <span class="game-title">Simon &#174;</span>
+    <p class="game-title">Simon<span class="registered">&#174;<span></p>
+
+
+
+
 
     <!-- Div wraps start and strict buttons -->
     <div class="buttons-wrapper">
 
+      <div class="screen-wrapper">
+        <!-- this will serve as the LED readout -->
+        <div id="screen" class="screen"></div>
+        <span class="count-text">Count</span>
+      </div>
+
+
       <!-- Start Button -->
       <div class="start-button-wrapper">
         <div id="start-button" class="button start-button"></div>
-        <span>Strict Mode</span>
+        <span>Start</span>
       </div>
 
       <!-- Strict Mode Button -->
@@ -48,6 +61,9 @@
 
 
     <div class="on-switch-container">
+      <span class="off-text">OFF</span>
+      <span class="on-text">ON</span>
+      <div id="on-light" class="on-light"></div>
       <div id="on-switch" class="on-switch">
         <div id="on-switch-knob" class="on-switch-knob"></div>
       </div>

@@ -99,6 +99,7 @@ window.onload = function() {
   var onSwitchKnob = document.getElementById("on-switch-knob");
   var strictButton = document.getElementById("strict-button");
   var buttons = document.getElementsByClassName('button');
+  var onLight = document.getElementById('on-light');
 
   // handler for the strict mode button
   strictButton.addEventListener('click', function() {
@@ -130,17 +131,23 @@ window.onload = function() {
 
 
   // Handler for the on switch for the console
-  onSwitch.addEventListener('click', function() {
+  onSwitch.addEventListener('mousedown', function() {
     if (onSwitchKnob.className.indexOf('knob-on') < 0) {
       addClass(onSwitchKnob, 'on-switch-knob-on');
+      addClass(onLight, 'on-light-on');
+      console.log(onLight.className);
+
       // Turns console on
       turnConsoleOn();
 
     } else {
       removeClass(onSwitchKnob, 'on-switch-knob-on');
+      removeClass(onLight, 'on-light-on');
+
       // Turns console off
       turnConsoleOff();
     }
   });
+
 
 }

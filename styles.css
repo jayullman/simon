@@ -64,13 +64,31 @@ button {
     END CSS RESET
 ***********************/
 
+body {
+	text-align: center;
+}
+
+h1 {
+	margin-top: 5px;
+	margin-bottom: 10px;
+	font-family: 'Bungee', cursive;
+	font-size: 2.5em;
+}
+
+h2 {
+	font-family: 'Orbitron', sans-serif;
+	font-size: .8em;
+	letter-spacing: .5em;
+}
 
 .console {
-	width: 325px;
-	height: 325px;
-	outline: 1px solid red;
+	width: 318px;
+	height: 318px;
 	margin: 20px auto 0 auto;
 	position: relative;
+	border-radius: 100%;
+	box-shadow: -3px 3px 10px 3px #636363;
+
 }
 
 .pad {
@@ -78,7 +96,7 @@ button {
 	height: 135px;
 	display: inline-block;
 	vertical-align: top;
-	border: 8px solid #000;
+	border: 8px solid #3c3c3c;
 
 }
 
@@ -117,6 +135,7 @@ button {
 	background-color: #a0ad00;
 	border-left-width: 16px;
 	border-bottom-width: 16px;
+	/*box-shadow: 3px 3px 30px black;*/
 }
 
 .pad-2-on {
@@ -129,6 +148,7 @@ button {
 	background-color: #008a8a;
 	border-right-width: 16px;
 	border-bottom-width: 16px;
+
 }
 
 .pad-3-on {
@@ -140,7 +160,22 @@ button {
  CENTER CONTROL STYLES
 ***********************/
 
+.game-title {
+	margin-top: 15px;
+	font-weight: bold;
+	font-size: 1.4em;
+	font-family: 'Bungee', cursive;
+}
+
+.registered {
+	font-size: .5em;
+	position: relative;
+	bottom: 10px;
+	font-family: serif;
+}
+
 .center-control {
+	border: 2px solid #000;
 	border-radius: 100%;
 	width: 150px;
 	height: 150px;
@@ -152,38 +187,70 @@ button {
 	text-align: center;
 }
 
-.on-switch {
-	height: 15px;
-	width: 40px;
-	border: 2px solid black;
-	/*border-top-left-radius: 20%;
-	border-bottom-left-radius: 20%;
-	border-top-right-radius: 20%;
-	border-bottom-right-radius: 20%;*/
-	border-radius: 10px;
+
+.on-switch-container {
 	position: absolute;
 	bottom: 10%;
 	left: 50%;
 	transform: translateX(-50%);
+
+}
+
+.off-text,
+.on-text  {
+	position: relative;
+	font-size: .75em;
+	top: 20px;
+}
+
+.off-text {
+	right: 25px;
+}
+
+.on-text {
+	left: 22px;
+}
+
+.on-switch {
+	height: 19px;
+	width: 40px;
+	border: 2px solid #000;
+	border-radius: 10px;
+	background-color: #636363;
+
 }
 
 .on-switch-knob {
 	height: 15px;
 	width: 15px;
 	border-radius: 100%;
-	background-color: #000;
+	border: 2px solid #383838;
+	background-color: #b04f3d;
 	transition: transform .5s;
+}
+
+.on-light {
+	width: 3px;
+	height: 3px;
+	border-radius: 100%;
+	border: 1px solid #000;
+	position: relative;
+	left: 68px;
+	top: 10px;
+	background-color: #630000;
 
 }
 
+.on-light-on {
+	background-color: #ff0000;
+}
+
+/*transform style will be for on position */
 .on-switch-knob-on {
-	/*transform style will be for on position */
-	transform: translateX(25px);
+	transform: translateX(21px);
 }
 
-.buttons-wrapper {
 
-}
 
 .button {
 	width: 20px;
@@ -200,27 +267,47 @@ button {
 	box-shadow: none;
 }
 
-.strict-button-wrapper {
+/* style contains the start, strict buttons */
+.buttons-wrapper {
+	font-size: .75em;
+	margin-top: 20px;
+	position: relative;
+	left: 5px;
+}
+
+.screen-wrapper {
 	text-align: center;
-	outline: 1px solid red;
 	width: 50px;
 	display: inline-block;
-}
-
-.strict-button {
-	background-color: #9c9e10;
-}
-
-.strict-button-on {
-	background-color: #fbff2a;
+	vertical-align: top;
+	float: left;
 
 }
+
+.screen {
+	width: 45px;
+	height: 25px;
+	border-radius: 20px;
+	border: 2px solid #000;
+	background-color: #530000;
+	color: #b90000;
+	position: relative;
+	left: 5px;
+}
+
+.count-text {
+	position: relative;
+	left: 5px;
+}
+
 
 .start-button-wrapper {
 	text-align: center;
-	outline: 1px solid red;
 	width: 50px;
 	display: inline-block;
+	vertical-align: top;
+	float: left;
+
 }
 
 .start-button {
@@ -230,5 +317,22 @@ button {
 
 .start-button-on {
 	background-color: #ff0000;
+
+}
+
+.strict-button-wrapper {
+	text-align: center;
+	width: 30px;
+	display: inline-block;
+	float: left;
+
+}
+
+.strict-button {
+	background-color: #9c9e10;
+}
+
+.strict-button-on {
+	background-color: #fbff2a;
 
 }
