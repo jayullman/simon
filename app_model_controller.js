@@ -3,6 +3,14 @@
   MODEL / CONTROLLER
 **********************/
 
+function turnConsoleOn() {
+  consoleIsOn = true;
+}
+
+function turnConsoleOff() {
+  consoleIsOn = false;
+
+}
 
 function computerRandomChoice() {
   return Math.floor(Math.random() * 4);
@@ -47,14 +55,20 @@ function outerFunctionPlayerChoice() {
 }
 
 
-
-var playerChoice = outerFunctionPlayerChoice();
+/* GAME STATE VARIABLES */
+/*****************************/
 
 var strictMode = false;
 var computerSelections = [];
 
 // this bool will allow/disallow interaction with app
 var isPlayersTurn = false;
+var consoleIsOn = false;
+
+/*****************************/
+
+
+var playerChoice = outerFunctionPlayerChoice();
 
 function computerTurn() {
   isPlayersTurn = false;

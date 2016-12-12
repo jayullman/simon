@@ -3,6 +3,22 @@
          VIEW
 **********************/
 
+// function adds a class to the passed-in elem
+function addClass(elem, style) {
+  elem.className += ' ' + style;
+}
+
+// function removes a class from the passed-in elem
+function removeClass(elem, style) {
+  var elemClassList = elem.className;
+  var startIndex = elemClassList.indexOf(' ' + style);
+  if (startIndex > -1) {
+    var revertedClassList = elemClassList.slice(0, startIndex);
+    elem.className = revertedClassList;
+  }
+}
+
+
 var pads = document.getElementsByClassName('pad');
 
 function pressDown(e) {
@@ -51,4 +67,23 @@ window.onload = function() {
     pads[i].addEventListener('mousedown', pressDown);
     pads[i].addEventListener('mouseup', pressUp);
   }
+
+
+  // CONTROL CENTER EVENT HANDLERS
+  var onSwitch = document.getElementById("on-switch");
+  var onSwitchKnob = document.getElementById("on-switch-knob");
+  console.log(onSwitch);
+  onSwitch.addEventListener('click', function() {
+    if (onSwitchKnob.className.indexOf('knob-on') < 0) {
+      addClass(onSwitchKnob, 'on-switch-knob-on');
+      // Turns console on
+      turnConsoleOn();
+
+    } else {
+      removeClass(onSwitchKnob, 'on-switch-knob-on');
+      // Turns console off
+      turnConsoleOff();
+    }
+  });
+
 }
