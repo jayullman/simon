@@ -9,6 +9,19 @@ var sound1 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
 var sound2 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
 var sound3 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3');
 
+
+// TODO: finish the LED functions
+// handles LED screen updates
+function updateLED() {
+
+}
+
+// makes LED blink
+function blinkLED() {
+
+}
+
+
 // function adds a class to the passed-in elem
 function addClass(elem, style) {
   elem.className += ' ' + style;
