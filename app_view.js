@@ -5,6 +5,18 @@
 
 var pads = document.getElementsByClassName('pad');
 
+function pressDown(e) {
+  var padNumber = e.target.id.slice(-1);
+  illuminateOn(padNumber);
+
+}
+
+function  pressUp(e) {
+  var padNumber = Number(e.target.id.slice(-1));
+  illuminateOff(padNumber);
+  playerChoice(padNumber);
+  console.log(padNumber);
+}
 
 function illuminateOn(padNumber) {
   pads[padNumber].className += ' pad-' + padNumber + '-on';
@@ -22,12 +34,15 @@ function illuminateOff(padNumber) {
 
 window.onload = function() {
   // attach event handlers to all the pads
-  for (var i = 0; i < pads.length; i++) {
-    // TODO: add event listeners for mouse/touch down and up
-    pads[i].addEventListener('', clickPad);
 
-    //
+  // add event listeners for touch screens
+  if ('ontouchstart' in window) {
+    pads[i].addEventListener('touchstart', pressDown);
+    pads[i].addEventListener('touchend', pressUp);
   }
 
-
+  for (var i = 0; i < pads.length; i++) {
+    pads[i].addEventListener('mousedown', pressDown);
+    pads[i].addEventListener('mouseup', pressUp);
+  }
 }

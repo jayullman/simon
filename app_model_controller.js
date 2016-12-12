@@ -27,8 +27,10 @@ function outerFunctionPlayerChoice() {
       if (currentCount === computerSelections.length) {
         console.log("Computer's Turn!");
         currentCount = 0;
-        // --> go to computer's turn
-        computerTurn();
+        // --> go to computer's turn after slight pause
+        setTimeout(function() {
+          computerTurn();
+        }, 1500);
       }
     } else {
       console.log('Incorrect. Try again!');
@@ -71,11 +73,13 @@ function displayComputerSelections() {
       */
 
     console.log(selection + ' ON');
+    illuminateOn(selection);
 
     // create closure with IIFE to capture value of selection
     (function(selection) {
       setTimeout(function() {
         console.log(selection + ' OFF');
+        illuminateOff(selection);
         // if last in series, will change isPlayersTurn to true
         if (lastInSeries === true) {
           console.log('Player\'s Turn!');
@@ -102,7 +106,8 @@ function displayComputerSelections() {
       }
       setTimeout(function() {
         displaySelection(computerSelections[y], lastInSeries);
-      }, i * 3000);
+        // i * number determines the delay between computerSelections
+      }, i * 2000);
     })(i, lastInSeries);
 
   } // END for-loop
