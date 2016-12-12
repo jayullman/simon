@@ -5,10 +5,28 @@
 
 function turnConsoleOn() {
   consoleIsOn = true;
+  console.log('console is on');
 }
 
 function turnConsoleOff() {
   consoleIsOn = false;
+  console.log('console is off');
+
+}
+
+function turnStrictModeOn() {
+  strictMode = true;
+  console.log('strict mode is on');
+}
+
+function turnStrictModeOff() {
+  strictMode = false;
+  console.log('strict mode is off');
+
+}
+
+// start button functionality
+function startGame() {
 
 }
 

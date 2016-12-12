@@ -54,7 +54,6 @@ function illuminateOff(padNumber) {
 
 window.onload = function() {
   // attach event handlers to all the pads
-  console.log(pads);
   // add event listeners for touch screens
   if ('ontouchstart' in window) {
     for (var i = 0; i < pads.length; i++) {
@@ -72,7 +71,24 @@ window.onload = function() {
   // CONTROL CENTER EVENT HANDLERS
   var onSwitch = document.getElementById("on-switch");
   var onSwitchKnob = document.getElementById("on-switch-knob");
-  console.log(onSwitch);
+  var strictButton = document.getElementById("strict-button");
+
+  // handler for the strict mode button
+  strictButton.addEventListener('click', function() {
+    if (!strictMode) {
+      /*
+      * turn console on
+      * turn light on button
+      */
+      addClass(strictButton, 'strict-button-on');
+      turnStrictModeOn();
+    } else {
+      removeClass(strictButton, 'strict-button-on');
+      turnStrictModeOff();
+    }
+  });
+
+  // Handler for the on switch for the console
   onSwitch.addEventListener('click', function() {
     if (onSwitchKnob.className.indexOf('knob-on') < 0) {
       addClass(onSwitchKnob, 'on-switch-knob-on');
