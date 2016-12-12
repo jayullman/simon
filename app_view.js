@@ -3,6 +3,12 @@
          VIEW
 **********************/
 
+// loads all sound files
+var sound0 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
+var sound1 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
+var sound2 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
+var sound3 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3');
+
 // function adds a class to the passed-in elem
 function addClass(elem, style) {
   elem.className += ' ' + style;
@@ -39,7 +45,13 @@ function  pressUp(e) {
 }
 
 function illuminateOn(padNumber) {
+  var soundFile = 'sound' + padNumber;
+
   pads[padNumber].className += ' pad-' + padNumber + '-on';
+
+  // plays the appropriate sound for the corresponding pad
+  window[soundFile].play();
+
 }
 
 
