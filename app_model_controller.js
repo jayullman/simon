@@ -8,6 +8,7 @@
 
 var WIN_GOAL = 20;
 var consoleIsOn = false;
+var strictMode = false;
 
 /** bool that interupts some functionality of buttons
     such as when there is a message to the player
@@ -31,31 +32,53 @@ function turnConsoleOn() {
 }
 
 function turnConsoleOff() {
+  var strictButton = document.getElementById('strict-button');
   consoleIsOn = false;
   game.isPlayersTurn = false;
-  console.log('console is off');
+  strictMode = false;
+  removeClass(strictButton, 'strict-button-on');
+  game = new Game();
+  playerChoice = outerFunctionPlayerChoice();
+  updateLED('--');
+  // blinkLED(1);
+  setTimeout(function() {
+    updateLED('');
+  }, 1500);
+
 
 }
 
 function turnStrictModeOn() {
-  game.strictMode = true;
+  strictMode = true;
   console.log('strict mode is on');
 }
 
 function turnStrictModeOff() {
-  game.strictMode = false;
+  strictMode = false;
   console.log('strict mode is off');
 
 }
 
 // start button functionality
 function startGame() {
+  // var restart = false;
   if (consoleIsOn) {
     console.log('starting game!');
 
-    game = new Game();
-
-    computerTurn();
+    // if game is in progress, the will create a small delay before game restarts
+    if (game.getCurrentCount() > 1) {
+      game = new Game();
+      playerChoice = outerFunctionPlayerChoice();
+      updateLED('--');
+      blinkLED(1);
+      setTimeout(function() {
+        computerTurn();
+      }, 2000);
+    } else {
+      setTimeout(function() {
+        computerTurn();
+      }, 500);
+    }
 
   }
 }
@@ -105,7 +128,7 @@ function wrongGuess() {
   blinkLED(2);
 
   setTimeout(function() {
-    if (game.strictMode === true) {
+    if (strictMode === true) {
       console.log('Game restarting');
       startGame();
     } else {
@@ -144,6 +167,7 @@ function outerFunctionPlayerChoice() {
 
     // incorrect guess
     } else {
+      guessNumber = 0;
       wrongGuess();
     }
   };
@@ -170,8 +194,6 @@ function Game() {
   };
 }
 var game = new Game();
-
-
 
 function computerTurn() {
   updateLED(game.getCurrentCount());

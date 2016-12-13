@@ -76,22 +76,36 @@ function  pressUp(e) {
 }
 
 function illuminateOn(padNumber) {
-  var soundFile = 'sound' + padNumber;
+  /** try catch avoids situation where player resets game while the computer
+      is still attempting to display it's former selections
+    */
+  try {
+    var soundFile = 'sound' + padNumber;
+    pads[padNumber].className += ' pad-' + padNumber + '-on';
+    // plays the appropriate sound for the corresponding pad
+    window[soundFile].play();
+  } catch (e) {
 
-  pads[padNumber].className += ' pad-' + padNumber + '-on';
+  }
 
-  // plays the appropriate sound for the corresponding pad
-  window[soundFile].play();
+
 
 }
 
 
 function illuminateOff(padNumber) {
-  var elemClassList = pads[padNumber].className;
-  var startIndex = elemClassList.indexOf(' ' + 'pad-' + padNumber + '-on');
-  if (startIndex > -1) {
-    var revertedClassList = elemClassList.slice(0, startIndex);
-    pads[padNumber].className = revertedClassList;
+  /** try catch avoids situation where player resets game while the computer
+      is still attempting to display it's former selections
+    */
+  try {
+    var elemClassList = pads[padNumber].className;
+    var startIndex = elemClassList.indexOf(' ' + 'pad-' + padNumber + '-on');
+    if (startIndex > -1) {
+      var revertedClassList = elemClassList.slice(0, startIndex);
+      pads[padNumber].className = revertedClassList;
+    }
+  } catch (e) {
+
   }
 }
 
@@ -143,8 +157,8 @@ window.onload = function() {
   // handler for the strict mode button
   strictButton.addEventListener('click', function() {
     if (consoleIsOn) {
-      if (!game.strictMode) {
-        
+      if (!strictMode) {
+
         addClass(strictButton, 'strict-button-on');
         turnStrictModeOn();
       } else {
