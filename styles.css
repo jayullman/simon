@@ -97,7 +97,8 @@ h2 {
 	display: inline-block;
 	vertical-align: top;
 	border: 8px solid #3c3c3c;
-
+	/* removes gray outline when touching button on mobile browsers */
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 
@@ -259,6 +260,8 @@ h2 {
 	margin: 0 auto;
 	box-shadow: 0 2px #686868;
 	border: 2px solid gray;
+	/* removes gray outline when touching button on mobile browsers */
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .button-down {
@@ -338,4 +341,11 @@ h2 {
 .strict-button-on {
 	background-color: #fbff2a;
 
+}
+
+footer {
+	margin-top: 20px;
+	font-size: .8em;
+	text-align: center;
+	font-family: 'Orbitron', sans-serif;
 }
