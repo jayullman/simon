@@ -6,6 +6,15 @@
 function turnConsoleOn() {
   consoleIsOn = true;
   console.log('console is on');
+  updateLED('ON');
+  blinkLED(1);
+  setTimeout(function() {
+    updateLED('');
+  }, 2000);
+
+  setTimeout(function() {
+    updateLED('--');
+  }, 2500);
 }
 
 function turnConsoleOff() {

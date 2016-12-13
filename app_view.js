@@ -19,10 +19,9 @@ function updateLED(text) {
 }
 
 // makes LED blink
-function blinkLED() {
+function blinkLED(numberOfBlinks) {
   var led = document.getElementById('screen');
   var currentContent = led.innerHTML;
-  var numberOfBlinks = 2;
 
   if (currentContent !== '') {
 
@@ -39,8 +38,6 @@ function blinkLED() {
       };
     }
 }
-
-
 
 
 // function adds a class to the passed-in elem
