@@ -59,7 +59,7 @@ function removeClass(elem, style) {
 var pads = document.getElementsByClassName('pad');
 
 function pressDown(e) {
-  if (isPlayersTurn) {
+  if (game.isPlayersTurn) {
     var padNumber = e.target.id.slice(-1);
     illuminateOn(padNumber);
   }
@@ -67,7 +67,7 @@ function pressDown(e) {
 }
 
 function  pressUp(e) {
-  if (isPlayersTurn) {
+  if (game.isPlayersTurn) {
     var padNumber = Number(e.target.id.slice(-1));
     illuminateOff(padNumber);
     playerChoice(padNumber);
@@ -131,19 +131,26 @@ window.onload = function() {
   var strictButton = document.getElementById("strict-button");
   var buttons = document.getElementsByClassName('button');
   var onLight = document.getElementById('on-light');
+  var startButton = document.getElementById('start-button');
+
+  // handler for startButton
+  startButton.addEventListener('click', function () {
+    if (holdButtonFunctons === false) {
+      startGame();
+    }
+  });
 
   // handler for the strict mode button
   strictButton.addEventListener('click', function() {
-    if (!strictMode) {
-      /*
-      * turn console on
-      * turn light on button
-      */
-      addClass(strictButton, 'strict-button-on');
-      turnStrictModeOn();
-    } else {
-      removeClass(strictButton, 'strict-button-on');
-      turnStrictModeOff();
+    if (consoleIsOn) {
+      if (!game.strictMode) {
+        
+        addClass(strictButton, 'strict-button-on');
+        turnStrictModeOn();
+      } else {
+        removeClass(strictButton, 'strict-button-on');
+        turnStrictModeOff();
+      }
     }
   });
 

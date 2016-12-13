@@ -3,40 +3,61 @@
   MODEL / CONTROLLER
 **********************/
 
+/* GAME STATE VARIABLES */
+/*****************************/
+
+var WIN_GOAL = 20;
+var consoleIsOn = false;
+
+/** bool that interupts some functionality of buttons
+    such as when there is a message to the player
+  */
+var holdButtonFunctons = false;
+
+/*****************************/
+
 function turnConsoleOn() {
-  consoleIsOn = true;
+
   console.log('console is on');
   updateLED('ON');
-  blinkLED(1);
   setTimeout(function() {
     updateLED('');
-  }, 2000);
+  }, 1000);
 
   setTimeout(function() {
     updateLED('--');
-  }, 2500);
+    consoleIsOn = true;
+  }, 1500);
 }
 
 function turnConsoleOff() {
   consoleIsOn = false;
+  game.isPlayersTurn = false;
   console.log('console is off');
 
 }
 
 function turnStrictModeOn() {
-  strictMode = true;
+  game.strictMode = true;
   console.log('strict mode is on');
 }
 
 function turnStrictModeOff() {
-  strictMode = false;
+  game.strictMode = false;
   console.log('strict mode is off');
 
 }
 
 // start button functionality
 function startGame() {
+  if (consoleIsOn) {
+    console.log('starting game!');
 
+    game = new Game();
+
+    computerTurn();
+
+  }
 }
 
 function computerRandomChoice() {
@@ -48,64 +69,121 @@ function computerRandomChoice() {
   */
 function resetGame() {
   console.log('Restarting');
-  computerSelections = [];
+  game = new Game();
+}
+
+// when player reaches the WIN_GOAL number
+function playerWin() {
+  game.isPlayersTurn = false;
+  holdButtonFunctons = true;
+  updateLED('WIN!');
+  blinkLED(3);
+  setTimeout(function() {
+    holdButtonFunctons = false;
+    startGame();
+  }, 4000);
+}
+
+// when a player guesses incorrectly
+function wrongGuess() {
+  game.isPlayersTurn = false;
+  console.log('Incorrect. Try again!');
+
+  illuminateOn(0);
+  illuminateOn(1);
+  illuminateOn(2);
+  illuminateOn(3);
+
+  setTimeout(function() {
+    illuminateOff(0);
+    illuminateOff(1);
+    illuminateOff(2);
+    illuminateOff(3);
+  }, 500);
+
+  updateLED('--');
+  blinkLED(2);
+
+  setTimeout(function() {
+    if (game.strictMode === true) {
+      console.log('Game restarting');
+      startGame();
+    } else {
+      setTimeout(function() {
+        updateLED(game.getCurrentCount())
+        displayComputerSelections();
+      }, 1000);
+    }
+  }, 2000);
+
+
 }
 
 // function produces a closure to keep track of current round number
 function outerFunctionPlayerChoice() {
-  var currentCount = 0;
+  var guessNumber = 0;
 
   var inner = function(choice) {
-    if (choice === computerSelections[currentCount]) {
+    // correct guess
+    if (choice === game.computerSelections[guessNumber]) {
       console.log('correct!');
-      currentCount++;
-      if (currentCount === computerSelections.length) {
+      guessNumber++;
+
+      if (guessNumber === WIN_GOAL) {
+        guessNumber = 0;
+        playerWin();
+      } else if (guessNumber === game.computerSelections.length) {
         console.log("Computer's Turn!");
-        currentCount = 0;
+        guessNumber = 0;
+        game.incrementCount();
         // --> go to computer's turn after slight pause
         setTimeout(function() {
           computerTurn();
         }, 1500);
       }
-    } else {
-      console.log('Incorrect. Try again!');
-      if (strictMode === true) {
-        console.log('Game restarting');
-        resetGame();
-      } else {
-        displayComputerSelections();
-      }
 
+    // incorrect guess
+    } else {
+      wrongGuess();
     }
   };
   return inner;
 }
-
-
-/* GAME STATE VARIABLES */
-/*****************************/
-
-var strictMode = false;
-var computerSelections = [];
-
-// this bool will allow/disallow interaction with app
-var isPlayersTurn = false;
-var consoleIsOn = false;
-
-/*****************************/
-
-
 var playerChoice = outerFunctionPlayerChoice();
 
+
+
+// constructor function creates new instance of game
+function Game() {
+  var currentCount = 1;
+  this.strictMode = false;
+  this.computerSelections = [];
+
+  // this bool will allow/disallow interaction with app
+  this.isPlayersTurn = false;
+
+  this.incrementCount = function() {
+    currentCount++;
+  };
+  this.getCurrentCount = function() {
+    return currentCount;
+  };
+}
+var game = new Game();
+
+
+
 function computerTurn() {
-  isPlayersTurn = false;
+  updateLED(game.getCurrentCount());
+  game.isPlayersTurn = false;
   var computerChoice = computerRandomChoice();
 
-  computerSelections.push(computerChoice);
+  game.computerSelections.push(computerChoice);
 
   displayComputerSelections();
 }
 
+// TODO: find a way to stop comp from displayer after user presses start
 function displayComputerSelections() {
   // this function will display the computer choice
   var displaySelection = function(selection, lastInSeries) {
@@ -114,6 +192,7 @@ function displayComputerSelections() {
       */
 
     console.log(selection + ' ON');
+    // if (game.computerSelections[0] !== undefined) {
     illuminateOn(selection);
 
     // create closure with IIFE to capture value of selection
@@ -124,12 +203,12 @@ function displayComputerSelections() {
         // if last in series, will change isPlayersTurn to true
         if (lastInSeries === true) {
           console.log('Player\'s Turn!');
-          isPlayersTurn = true;
+          game.isPlayersTurn = true;
         }
         // the number below determines how long the ON/OFF state is
-      }, 1000);
+      }, 800);
     })(selection);
-
+// }
   };
 
   /** lastInSeries: bool, will be set to true once computer finishes displaying
@@ -137,20 +216,23 @@ function displayComputerSelections() {
     */
 
   var lastInSeries = false;
-  for (var i = 0; i < computerSelections.length; i++) {
+
+
+  for (var i = 0; i < game.computerSelections.length; i++) {
     // sets timeout function for increasingly longer periods of time
 
     // create closure with IIFE to capture value of i upon loop execution
 
     (function(y, lastInSeries) {
-      if (y === computerSelections.length - 1) {
+      if (y === game.computerSelections.length - 1) {
         lastInSeries = true;
       }
       setTimeout(function() {
-        displaySelection(computerSelections[y], lastInSeries);
+        displaySelection(game.computerSelections[y], lastInSeries);
         // i * number determines the delay between computerSelections
       }, i * 1000);
     })(i, lastInSeries);
 
   } // END for-loop
+
 } // END displayComputerSelection
