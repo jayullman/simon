@@ -290,7 +290,10 @@ h2 {
 	border-radius: 20px;
 	border: 2px solid #000;
 	background-color: #530000;
-	color: #b90000;
+	color: #ff0000;
+	font-size: 1em;
+	line-height: 25px;
+	font-family: 'Orbitron', sans-serif;
 	position: relative;
 	left: 5px;
 }

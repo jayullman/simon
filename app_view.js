@@ -12,13 +12,40 @@ var sound3 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3');
 
 // TODO: finish the LED functions
 // handles LED screen updates
+
 function updateLED() {
 
 }
 
 // makes LED blink
 function blinkLED() {
+  var led = document.getElementById('screen');
+  var currentContent = led.innerHTML;
 
+  // TODO: turn this into a for loop
+  if (currentContent !== '') {
+
+
+
+
+    led.innerHTML = '';
+    setTimeout(function() {
+      led.innerHTML = currentContent;
+    }, 500);
+    setTimeout(function() {
+      led.innerHTML = '';
+    }, 500);
+    setTimeout(function() {
+      led.innerHTML = currentContent;
+    }, 500);
+    setTimeout(function() {
+      led.innerHTML = '';
+    }, 500);
+    setTimeout(function() {
+      led.innerHTML = currentContent;
+    }, 500);
+
+  }
 }
 
 
