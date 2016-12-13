@@ -126,16 +126,16 @@ function buttonUp(e) {
 window.onload = function() {
   // attach event handlers to all the pads
   // add event listeners for touch screens
-  if ('ontouchstart' in window) {
+   if ('ontouchstart' in window) {
     for (var i = 0; i < pads.length; i++) {
       pads[i].addEventListener('touchstart', pressDown);
       pads[i].addEventListener('touchend', pressUp);
     }
-  }
-
-  for (var i = 0; i < pads.length; i++) {
-    pads[i].addEventListener('mousedown', pressDown);
-    pads[i].addEventListener('mouseup', pressUp);
+  } else {
+    for (var i = 0; i < pads.length; i++) {
+      pads[i].addEventListener('mousedown', pressDown);
+      pads[i].addEventListener('mouseup', pressUp);
+    }
   }
 
 
@@ -167,19 +167,22 @@ window.onload = function() {
       }
     }
   });
-
-  // handlers for button presses
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener('mousedown', buttonDown);
-    buttons[i].addEventListener('mouseup', buttonUp);
-  }
-
+  // handlers for touch screen presses
   if ('ontouchstart' in window) {
     for (var i = 0; i < buttons.length; i++) {
       buttons[i].addEventListener('touchstart', buttonDown);
       buttons[i].addEventListener('touchend', buttonUp);
     }
+  } else {
+    // handlers for button presses
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].addEventListener('mousedown', buttonDown);
+      buttons[i].addEventListener('mouseup', buttonUp);
+    }
   }
+
+
+
 
 
   // Handler for the on switch for the console
