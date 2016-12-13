@@ -13,40 +13,34 @@ var sound3 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3');
 // TODO: finish the LED functions
 // handles LED screen updates
 
-function updateLED() {
-
+function updateLED(text) {
+  var led = document.getElementById('screen');
+  led.innerHTML = text;
 }
 
 // makes LED blink
 function blinkLED() {
   var led = document.getElementById('screen');
   var currentContent = led.innerHTML;
+  var numberOfBlinks = 2;
 
-  // TODO: turn this into a for loop
   if (currentContent !== '') {
 
+    for (var i = 0; i < numberOfBlinks; i++) {
+        setTimeout(function() {
+          led.innerHTML = '';
+          console.log('off');
+        }, (i * 1000) + 500);
 
-
-
-    led.innerHTML = '';
-    setTimeout(function() {
-      led.innerHTML = currentContent;
-    }, 500);
-    setTimeout(function() {
-      led.innerHTML = '';
-    }, 500);
-    setTimeout(function() {
-      led.innerHTML = currentContent;
-    }, 500);
-    setTimeout(function() {
-      led.innerHTML = '';
-    }, 500);
-    setTimeout(function() {
-      led.innerHTML = currentContent;
-    }, 500);
-
-  }
+        setTimeout(function() {
+          led.innerHTML = currentContent;
+          console.log('on');
+        }, (i * 1000) + 1000);
+      };
+    }
 }
+
+
 
 
 // function adds a class to the passed-in elem
