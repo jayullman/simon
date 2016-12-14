@@ -19,7 +19,6 @@ var holdButtonFunctons = false;
 
 function turnConsoleOn() {
 
-  console.log('console is on');
   updateLED('ON');
   setTimeout(function() {
     updateLED('');
@@ -50,21 +49,16 @@ function turnConsoleOff() {
 
 function turnStrictModeOn() {
   strictMode = true;
-  console.log('strict mode is on');
 }
 
 function turnStrictModeOff() {
   strictMode = false;
-  console.log('strict mode is off');
-
 }
 
 // start button functionality
 function startGame() {
   // var restart = false;
   if (consoleIsOn) {
-    console.log('starting game!');
-
     // if game is in progress, the will create a small delay before game restarts
     if (game.getCurrentCount() > 1) {
       game = new Game();
@@ -91,7 +85,6 @@ function computerRandomChoice() {
     answer in strict mode.
   */
 function resetGame() {
-  console.log('Restarting');
   game = new Game();
 }
 
@@ -110,7 +103,6 @@ function playerWin() {
 // when a player guesses incorrectly
 function wrongGuess() {
   game.isPlayersTurn = false;
-  console.log('Incorrect. Try again!');
 
   illuminateOn(0);
   illuminateOn(1);
@@ -129,7 +121,6 @@ function wrongGuess() {
 
   setTimeout(function() {
     if (strictMode === true) {
-      console.log('Game restarting');
       startGame();
     } else {
       setTimeout(function() {
@@ -149,7 +140,6 @@ function outerFunctionPlayerChoice() {
   var inner = function(choice) {
     // correct guess
     if (choice === game.computerSelections[guessNumber]) {
-      console.log('correct!');
       guessNumber++;
 
       if (guessNumber === WIN_GOAL) {
@@ -158,7 +148,6 @@ function outerFunctionPlayerChoice() {
       } else if (guessNumber === game.computerSelections.length) {
         game.isPlayersTurn = false;
 
-        console.log("Computer's Turn!");
         guessNumber = 0;
         game.incrementCount();
         // --> go to computer's turn after slight pause
@@ -209,28 +198,19 @@ function computerTurn() {
 function displayComputerSelections() {
   // this function will display the computer choices
   var displaySelection = function(selection, lastInSeries) {
-    /** use console.log(on: choice) to simulate when a selection is on
-            console.log(off: choice) when selection is turned off
-      */
-
-    console.log(selection + ' ON');
-    // if (game.computerSelections[0] !== undefined) {
     illuminateOn(selection);
 
     // create closure with IIFE to capture value of selection
     (function(selection) {
       setTimeout(function() {
-        console.log(selection + ' OFF');
         illuminateOff(selection);
         // if last in series, will change isPlayersTurn to true
         if (lastInSeries === true) {
-          console.log('Player\'s Turn!');
           game.isPlayersTurn = true;
         }
         // the number below determines how long the ON/OFF state is
       }, 800);
     })(selection);
-// }
   };
 
   /** lastInSeries: bool, will be set to true once computer finishes displaying

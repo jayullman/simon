@@ -29,12 +29,10 @@ function blinkLED(numberOfBlinks) {
     for (var i = 0; i < numberOfBlinks; i++) {
         setTimeout(function() {
           led.innerHTML = '';
-          console.log('off');
         }, (i * 1000) + 500);
 
         setTimeout(function() {
           led.innerHTML = currentContent;
-          console.log('on');
         }, (i * 1000) + 1000);
       };
     }
@@ -72,7 +70,6 @@ function  pressUp(e) {
     var padNumber = Number(e.target.id.slice(-1));
     illuminateOff(padNumber);
     playerChoice(padNumber);
-    console.log(padNumber);
   }
 }
 
@@ -189,15 +186,11 @@ window.onload = function() {
   }
 
 
-
-
-
   // Handler for the on switch for the console
   onSwitch.addEventListener('mousedown', function() {
     if (onSwitchKnob.className.indexOf('knob-on') < 0) {
       addClass(onSwitchKnob, 'on-switch-knob-on');
       addClass(onLight, 'on-light-on');
-      console.log(onLight.className);
 
       // Turns console on
       turnConsoleOn();
