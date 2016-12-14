@@ -206,9 +206,8 @@ function computerTurn() {
   displayComputerSelections();
 }
 
-// TODO: find a way to stop comp from displayer after user presses start
 function displayComputerSelections() {
-  // this function will display the computer choice
+  // this function will display the computer choices
   var displaySelection = function(selection, lastInSeries) {
     /** use console.log(on: choice) to simulate when a selection is on
             console.log(off: choice) when selection is turned off

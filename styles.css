@@ -71,6 +71,7 @@ a:hover, a:active {
 
 body {
 	text-align: center;
+	background-color: #e4e4e4;
 }
 
 h1 {
@@ -327,6 +328,11 @@ h2 {
 	background-color: #630000;
 }
 
+.start-button-text {
+	position: relative;
+	top: 3px;
+}
+
 .start-button-on {
 	background-color: #ff0000;
 
@@ -353,5 +359,6 @@ footer {
 	margin-top: 20px;
 	font-size: .8em;
 	text-align: center;
+	letter-spacing: .3em;
 	font-family: 'Orbitron', sans-serif;
 }
