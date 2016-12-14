@@ -23,12 +23,12 @@ function turnConsoleOn() {
   updateLED('ON');
   setTimeout(function() {
     updateLED('');
-  }, 1000);
+  }, 900);
 
   setTimeout(function() {
     updateLED('--');
     consoleIsOn = true;
-  }, 1500);
+  }, 1200);
 }
 
 function turnConsoleOff() {
@@ -156,6 +156,8 @@ function outerFunctionPlayerChoice() {
         guessNumber = 0;
         playerWin();
       } else if (guessNumber === game.computerSelections.length) {
+        game.isPlayersTurn = false;
+
         console.log("Computer's Turn!");
         guessNumber = 0;
         game.incrementCount();
@@ -197,7 +199,6 @@ var game = new Game();
 
 function computerTurn() {
   updateLED(game.getCurrentCount());
-  game.isPlayersTurn = false;
   var computerChoice = computerRandomChoice();
 
   game.computerSelections.push(computerChoice);

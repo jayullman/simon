@@ -3,15 +3,16 @@
          VIEW
 **********************/
 
-// loads all sound files
-var sound0 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
-var sound1 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
-var sound2 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
-var sound3 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3');
+var sounds = ['simonSound1.mp3', 'simonSound2.mp3', 'simonSound3.mp3', 'simonSound4.mp3'];
 
 
-// TODO: finish the LED functions
-// handles LED screen updates
+
+function playSound(padNumber) {
+
+  createjs.Sound.play(sounds[padNumber]);
+
+}
+
 
 function updateLED(text) {
   var led = document.getElementById('screen');
@@ -80,10 +81,16 @@ function illuminateOn(padNumber) {
       is still attempting to display it's former selections
     */
   try {
-    var soundFile = 'sound' + padNumber;
+    //var soundFile = 'sound' + padNumber;
     pads[padNumber].className += ' pad-' + padNumber + '-on';
     // plays the appropriate sound for the corresponding pad
-    window[soundFile].play();
+
+    // old way
+    // window[soundFile].play();
+
+    // new way
+    playSound(padNumber);
+
   } catch (e) {
 
   }
@@ -203,6 +210,13 @@ window.onload = function() {
       turnConsoleOff();
     }
   });
+
+  // Loads audio using SoundJS library
+
+  createjs.Sound.registerSound('simonSound1.mp3', sounds[0]);
+  createjs.Sound.registerSound('simonSound2.mp3', sounds[1]);
+  createjs.Sound.registerSound('simonSound3.mp3', sounds[2]);
+  createjs.Sound.registerSound('simonSound4.mp3', sounds[3]);
 
 
 }
